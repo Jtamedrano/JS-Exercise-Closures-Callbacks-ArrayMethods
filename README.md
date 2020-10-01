@@ -96,6 +96,14 @@ addSix(21); // returns 27
 
 3. Research the differences between functional programming and object oriented programming. Then, describe the pros and cons of functional programming vs object-oriented programming. This is a common interview question and great practice!
 
+### Overrall Differences
+
+| Functional Programming                                                      | Object Oriented Programming                                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Modular way of programming. Functions are used to clearly to do their task. | Descriptive way of programming. Variables and classes are used to store and manipulate the data. |
+| Pros: Makes using function very clean and ordered                           | Pro: ability to manipulate data easily                                                           |
+| Con: Not able to manipulate and store date                                  | Con: Doesn't support Parallel Programming                                                        |
+
 ## Resources
 
 📚 [Scope and Closures Guide](https://css-tricks.com/javascript-scope-closures/)
