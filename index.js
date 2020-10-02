@@ -66,7 +66,7 @@ function counter2() {
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
 function inning() {
-  return Math.round(Math.random() * 2);
+  return Math.floor(Math.random() * 3);
 }
 /* Task 3: finalScore()
 
@@ -81,26 +81,26 @@ finalScore(inning, 9) might return:
 }
 
 */
-
 function finalScore(callback, number) {
-  let score = function () {
-    let i = 0;
-    let x = 0;
-    while (i < number) {
-      x += callback();
-      i++;
-      console.log(x);
-    }
-    return x;
+  const playInning = () => {
+    let score = 0;
+    return function () {
+      score += callback();
+      return score;
+    };
   };
 
-  return {
-    Home: score(),
-    Away: score(),
-  };
+  let homeScore = playInning();
+  let awayScore = playInning();
+  return Array(number)
+    .fill()
+    .map(() => {
+      return {
+        Home: homeScore(),
+        Away: awayScore(),
+      };
+    });
 }
-
-// Test Final Score Here: console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -124,33 +124,28 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function getInningScore(oldScore, call) {
-  return oldScore + call;
-}
-
 function scoreboard(call, func, inn) {
-  let awayTeam = 0;
-  let homeTeam = 0;
-  let board = Array(inn)
-    .fill()
-    .map((_, i) => {
-      awayTeam = call(awayTeam, func());
-      homeTeam = call(homeTeam, func());
-      switch (i) {
-        case 0:
-          return ` 1st inning: ${awayTeam} - ${homeTeam}`;
-        case 1:
-          return ` 2nd inning: ${awayTeam} - ${homeTeam}`;
-        case 2:
-          return ` 3rd inning: ${awayTeam} - ${homeTeam}`;
-        default:
-          return ` ${i + 1}th inning: ${awayTeam} - ${homeTeam}`;
-      }
-    });
-  board.forEach((i) => {
-    console.log(i);
-  });
-  console.log(`Final Score: ${awayTeam} - ${homeTeam}`);
+  let game = call(func, inn);
+
+  console.log(
+    game
+      .map((_, i) => {
+        switch (i) {
+          case 0:
+            return ` 1st inning: ${_.Home} - ${_.Home}\n`;
+          case 1:
+            return ` 2nd inning: ${_.Home} - ${_.Away}\n`;
+          case 2:
+            return ` 3rd inning: ${_.Home} - ${_.Away}\n`;
+          default:
+            return ` ${i + 1}th inning: ${_.Home} - ${_.Away}\n`;
+        }
+      })
+      .toString()
+  );
+  return `Final Score: ${game[game.length - 1].Home} - ${
+    game[game.length - 1].Away
+  }`;
 }
 
-scoreboard(getInningScore, inning, 9);
+console.log(scoreboard(finalScore, inning, 9));
