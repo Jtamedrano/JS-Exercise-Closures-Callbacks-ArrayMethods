@@ -42,7 +42,7 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
-   > Closure is where a functions are used inside a functions. They can be immediatly invoked, called on, or passed inside parameters.
+   > Closure is where functions are used inside a functions. They can be immediatly invoked, called on, or passed inside parameters.
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -65,9 +65,13 @@ dansRoll();
 a. Where is closure used in this code? How can you tell?
 
 > Yes because there is a function being returned inside the origininal function.
-> b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
 > The name "Dan" Stays the same but a new number can generates every time.
-> c. What is the lexical scope of `newRoll`?
+
+c. What is the lexical scope of `newRoll`?
+
 > 'newRoll' Doesn't have scope outside personalDice, online inside the returned function.
 
 ### Task 3 - Stretch Goals
